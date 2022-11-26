@@ -1,5 +1,6 @@
 package com.passwordsafe;
 
+
 import com.passwordsafe.datasource.MultipleFilesDataLayer;
 import com.passwordsafe.logger.LoggerFactoryService;
 import com.passwordsafe.logger.LoggerRepo;
@@ -10,6 +11,7 @@ import com.passwordsafe.passwordsubscriber.WrongPasswordSubscriber;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+
 import java.io.File;
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -23,6 +25,7 @@ public class Main {
     private static final MasterPasswordRepository masterRepository = new MasterPasswordRepository("./master.pw");
     private static PasswordSafeEngine passwordSafeEngine = null;
     private static LoggerRepo logger;
+
     static boolean passwordCheck =false;
 
 
@@ -36,14 +39,16 @@ public class Main {
     public static void main(String[] args) throws Exception {
             System.out.println("Welcome to Passwordsafe");
 
-            logger = LoggerFactoryService.getInstance().loggerRepoInstance();
+            logger = LoggerFactoryService.getInstance().loggerRepoInstance()
 
+  
             boolean abort = false;
             boolean locked = true;
             Scanner read = new Scanner(System.in);
             while (!abort) {
                 System.out.println("Enter master (1), show all (2), show single (3), add (4), delete(5), set new master (6), Abort (0)");
                 int input = read.nextInt();
+
                 selection(input,passwordCheck);
 
                 switch (input) {

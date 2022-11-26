@@ -20,9 +20,9 @@ public class PasswordSafeEngine {
         this.cipherFaciility = cipherFacility;
         this.dataLayer = dataLayer;
     }
-
     public String[] GetStoredPasswords() throws Exception {
         return dataLayer.getAllNamesOfPasswords();
+
     }
 
     public void AddNewPassword(PasswordInfo info) throws IOException, Exception {
