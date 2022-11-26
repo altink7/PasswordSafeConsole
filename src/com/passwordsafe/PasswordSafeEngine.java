@@ -19,7 +19,6 @@ public class PasswordSafeEngine {
     }
     public String[] GetStoredPasswords() throws Exception {
         File directory = new File(path);
-
         if (!directory.isDirectory() && !directory.mkdir()) {
             throw new Exception("Unable to create directory");
         }
