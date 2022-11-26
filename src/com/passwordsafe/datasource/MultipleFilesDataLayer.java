@@ -13,6 +13,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/***
+ * Class for multiple files data source
+ * implements IDataSourceLayer
+ * contains methods for CRUD operations from different files
+ */
+
 public record MultipleFilesDataLayer(String path) implements IDataSourceLayer {
 
     @Override

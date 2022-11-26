@@ -4,6 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.Date;
 
+/***
+ * WrongPasswordSubscriber
+ * implements ISubscriber
+ * it is a subscriber for the reset password
+ */
+
 public class PasswordResetSubscriber implements ISubscriber {
     record SelectionState(Integer menu, Date timeStamp) {}
     private LinkedList<SelectionState> selectionState = new LinkedList<>();

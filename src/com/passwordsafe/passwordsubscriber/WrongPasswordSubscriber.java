@@ -4,6 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
+/***
+ * WrongPasswordSubscriber
+ * implements ISubscriber
+ * it is a subscriber for wrong password
+ */
 public class WrongPasswordSubscriber implements ISubscriber{
     record SelectionState(Integer menu, Date timeStamp) {}
 

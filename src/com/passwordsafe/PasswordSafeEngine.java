@@ -11,6 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/***
+ * Class for encryption and decryption
+ * contains methods to delete, read and write passwords
+ */
+
 public class PasswordSafeEngine {
     private IDataSourceLayer dataLayer;
 
@@ -20,9 +25,9 @@ public class PasswordSafeEngine {
         this.cipherFaciility = cipherFacility;
         this.dataLayer = dataLayer;
     }
+
     public String[] GetStoredPasswords() throws Exception {
         return dataLayer.getAllNamesOfPasswords();
-
     }
 
     public void AddNewPassword(PasswordInfo info) throws IOException, Exception {

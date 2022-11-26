@@ -1,4 +1,9 @@
-package com.passwordsafe;;
+package com.passwordsafe;
+
+/***
+ * PasswordInfo
+ * contains password and strength
+ */
 
 public class PasswordInfo {
     private String plain;

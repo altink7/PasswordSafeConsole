@@ -5,6 +5,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/***
+ * MasterPasswordRepository
+ * contains methods to read and write master password
+ */
+
 public class MasterPasswordRepository {
     private String masterPasswordPath;
 
