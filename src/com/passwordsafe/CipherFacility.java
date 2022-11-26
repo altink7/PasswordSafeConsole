@@ -14,6 +14,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/***
+ * Class for encryption and decryption
+ * contains methods for encryption and decryption
+ */
+
 public class CipherFacility {
     private final String key;
     CipherFacility(String key) {
