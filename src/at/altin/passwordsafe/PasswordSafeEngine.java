@@ -1,5 +1,5 @@
-package com.passwordsafe;;
-import com.passwordsafe.datasource.IDataSourceLayer;
+package at.altin.passwordsafe;;
+import at.altin.passwordsafe.datasource.IDataSourceLayer;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -7,9 +7,6 @@ import javax.crypto.NoSuchPaddingException;
 import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /***
  * Class for encryption and decryption

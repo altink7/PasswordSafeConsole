@@ -1,4 +1,4 @@
-package com.passwordsafe;
+package at.altin.passwordsafe;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;

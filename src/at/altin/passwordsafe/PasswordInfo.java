@@ -1,4 +1,4 @@
-package com.passwordsafe;
+package at.altin.passwordsafe;
 
 /***
  * PasswordInfo

@@ -1,7 +1,8 @@
-package com.passwordsafe;
+package at.altin.passwordsafe;
+
+import at.altin.passwordsafe.datasource.MultipleFilesDataLayer;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -27,18 +28,7 @@ public class MasterPasswordRepository {
     }
     private String GetMasterPasswordFromFile() throws Exception {
         File passwordFile = new File(this.masterPasswordPath);
-        char[] buffer = null;
-        if (passwordFile.exists()) {
-            FileReader reader = null;
-            try {
-                buffer = new char[(int)passwordFile.length()];
-                reader = new FileReader(passwordFile);
-                reader.read(buffer);
-            }
-            finally {
-                if (reader != null) { try { reader.close(); } catch (IOException ex) { } };
-            }
-        }
+        char[] buffer = MultipleFilesDataLayer.getCipherPassword(passwordFile);
         return buffer == null ? null : new String(buffer);
     }
     private void StoreMasterPasswordToFile(String masterPassword) throws Exception {

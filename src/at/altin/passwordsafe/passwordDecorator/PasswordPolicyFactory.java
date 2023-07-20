@@ -1,4 +1,4 @@
-package com.passwordsafe.passwordDecorator;
+package at.altin.passwordsafe.passwordDecorator;
 
 /***
  * password policy factory method

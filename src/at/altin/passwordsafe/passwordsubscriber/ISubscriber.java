@@ -1,4 +1,4 @@
-package com.passwordsafe.passwordsubscriber;
+package at.altin.passwordsafe.passwordsubscriber;
 
 /***
  * interface for subscriber

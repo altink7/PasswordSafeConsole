@@ -1,12 +1,12 @@
-package com.passwordsafe;
+package at.altin.passwordsafe;
 
-import com.passwordsafe.datasource.MultipleFilesDataLayer;
-import com.passwordsafe.logger.LoggerFactoryService;
-import com.passwordsafe.logger.LoggerRepo;
-import com.passwordsafe.passwordDecorator.PasswordPolicyFactory;
-import com.passwordsafe.passwordsubscriber.ISubscriber;
-import com.passwordsafe.passwordsubscriber.PasswordResetSubscriber;
-import com.passwordsafe.passwordsubscriber.WrongPasswordSubscriber;
+import at.altin.passwordsafe.datasource.MultipleFilesDataLayer;
+import at.altin.passwordsafe.logger.LoggerFactoryService;
+import at.altin.passwordsafe.logger.LoggerRepo;
+import at.altin.passwordsafe.passwordDecorator.PasswordPolicyFactory;
+import at.altin.passwordsafe.passwordsubscriber.ISubscriber;
+import at.altin.passwordsafe.passwordsubscriber.PasswordResetSubscriber;
+import at.altin.passwordsafe.passwordsubscriber.WrongPasswordSubscriber;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -104,8 +104,6 @@ public class Main {
     }
 
     private static void setNewMasterPassword(Scanner read) throws Exception {
-        //Hier beginnt die impl. für US_1_S_1
-            //Hand-In 03 - Main Programmierteil START
                 String passwordMessage =("""
                         
                         (Password must contain at least one upper case letter,\s
@@ -125,7 +123,6 @@ public class Main {
                     passwordStrength = PasswordPolicyFactory.createPasswordPolicy(passwordStrengthMode).getStrength(masterPw);
 
                 }
-            //Hand-In 03 - Main Programmierteil ENDE
 
         System.out.println("Enter your new password again");
         String masterPw2 = read.next();
@@ -140,10 +137,7 @@ public class Main {
             logger.errorMessage("Password is not the same");
             return;
         }
-        //Hier endet die impl. für US_1_S_1
 
-
-        // urgent hotfix delete old passwords after changing the master
         File oldPasswords = new File("./passwords.pw");
         if (oldPasswords.isDirectory()) {
             String[] children = oldPasswords.list();
@@ -151,7 +145,7 @@ public class Main {
                 (new File(oldPasswords, children[i])).delete();
             }
         }
-        // The directory is now empty or this is a file so delete it
+
         oldPasswords.delete();
     }
 
@@ -161,7 +155,11 @@ public class Main {
         } else {
             System.out.println("Enter password name");
             String passwordName = read.next();
-            passwordSafeEngine.DeletePassword(passwordName);
+            try {
+                passwordSafeEngine.DeletePassword(passwordName);
+            }catch (Exception e){
+                System.out.println("Deletion not possible, Password may not exist!");
+            }
         }
     }
 

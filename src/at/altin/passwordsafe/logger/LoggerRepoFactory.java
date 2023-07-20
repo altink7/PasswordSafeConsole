@@ -1,4 +1,4 @@
-package com.passwordsafe.logger;
+package at.altin.passwordsafe.logger;
 
 /***
  * Factory von LoggerRepo

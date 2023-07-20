@@ -1,4 +1,4 @@
-package com.passwordsafe.passwordDecorator;
+package at.altin.passwordsafe.passwordDecorator;
 
 /***
  * interface for password policy

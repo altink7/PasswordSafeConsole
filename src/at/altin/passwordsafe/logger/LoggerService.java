@@ -1,4 +1,4 @@
-package com.passwordsafe.logger;
+package at.altin.passwordsafe.logger;
 
 /***
  * Hier werden die Methoden von LoggerRepo implementiert (Service Layer)

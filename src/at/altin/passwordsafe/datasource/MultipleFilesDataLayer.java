@@ -1,5 +1,6 @@
-package com.passwordsafe.datasource;
-import com.passwordsafe.PasswordSafeEngine;
+package at.altin.passwordsafe.datasource;
+import at.altin.passwordsafe.PasswordSafeEngine;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
@@ -32,6 +33,10 @@ public record MultipleFilesDataLayer(String path) implements IDataSourceLayer {
     @Override
     public char[] getPasswordCipher(String passwordName, PasswordSafeEngine passwordSafeEngine) throws IOException {
         File passwordFile = this.GetFileFromName(passwordName);
+        return getCipherPassword(passwordFile);
+    }
+
+    public static char[] getCipherPassword( File passwordFile) throws IOException {
         char[] buffer = null;
         if (passwordFile.exists()) {
             FileReader reader = null;
@@ -43,10 +48,9 @@ public record MultipleFilesDataLayer(String path) implements IDataSourceLayer {
                 if (reader != null) {
                     try {
                         reader.close();
-                    } catch (IOException ex) {
+                    } catch (IOException ignored) {
                     }
                 }
-                ;
             }
         }
         return buffer;
