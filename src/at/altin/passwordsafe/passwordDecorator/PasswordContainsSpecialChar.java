@@ -5,7 +5,6 @@ package at.altin.passwordsafe.passwordDecorator;
  * implements IPasswordPolicy
  * R2
  */
-
 public class PasswordContainsSpecialChar extends PasswordStrengthDecorator {
 
     public PasswordContainsSpecialChar(IPasswordPolicy passwordPolicy) {

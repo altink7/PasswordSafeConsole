@@ -12,6 +12,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /***
@@ -77,7 +78,7 @@ public record MultipleFilesDataLayer(String path) implements IDataSourceLayer {
         if (!directory.isDirectory() && !directory.mkdir()) {
             throw new Exception("Unable to create directory");
         }
-        List<File> files = Arrays.asList(directory.listFiles());
+        List<File> files = Arrays.asList(Objects.requireNonNull(directory.listFiles()));
         return files.stream()
                 .filter(s -> s.getName().endsWith(".pw"))
                 .map(f -> f.getName().split("\\.")[0]).toArray(String[]::new);

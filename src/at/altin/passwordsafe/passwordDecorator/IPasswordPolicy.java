@@ -7,6 +7,11 @@ package at.altin.passwordsafe.passwordDecorator;
  */
 
 public interface IPasswordPolicy {
+    /**
+     * get the Strength of Password Policy
+     * @param password givenPassword
+     * @return Strength
+     */
     int getStrength(String password);
 }
 

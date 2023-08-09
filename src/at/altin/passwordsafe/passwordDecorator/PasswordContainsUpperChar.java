@@ -5,7 +5,6 @@ package at.altin.passwordsafe.passwordDecorator;
  * implements IPasswordPolicy
  * R1
  */
-
 public class PasswordContainsUpperChar implements IPasswordPolicy {
 
     @Override

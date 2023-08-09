@@ -5,6 +5,7 @@ package at.altin.passwordsafe.logger;
  */
 
 public class LoggerService implements LoggerRepo{
+
     @Override
     public void infoMessage(String message) {
         System.out.println("info:"+message);

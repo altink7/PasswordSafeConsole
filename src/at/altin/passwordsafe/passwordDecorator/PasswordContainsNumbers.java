@@ -5,8 +5,6 @@ package at.altin.passwordsafe.passwordDecorator;
  * implements IPasswordPolicy
  * R4
  */
-
-
 public class PasswordContainsNumbers extends PasswordStrengthDecorator  {
 
     public PasswordContainsNumbers(IPasswordPolicy passwordPolicy) {
