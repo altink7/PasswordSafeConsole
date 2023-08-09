@@ -48,30 +48,22 @@ public class Main {
 
             boolean abort = false;
             boolean locked = true;
-            Scanner read = new Scanner(System.in);
+        try (Scanner read = new Scanner(System.in)) {
             while (!abort) {
                 System.out.println("Enter master (1), show all (2), show single (3), add (4), delete(5), set new master (6), Abort (0)");
                 int input = read.nextInt();
-                selection(input,passwordCheck);
+                selection(input, passwordCheck);
 
                 switch (input) {
-                    case 0 -> {
-                        abort = true;
-                    }
+                    case 0 -> abort = true;
                     case 1 -> {
                         passwordCheck = false;
                         locked = isLocked(read);
                     }
-                    case 2 -> {
-                        showAll(locked);
-                    }
-                    case 3 -> {
-                        showSingle(locked, read);
-                    }
+                    case 2 -> showAll(locked);
+                    case 3 -> showSingle(locked, read);
                     case 4 -> addNew(locked, read);
-                    case 5 -> {
-                        deletePassword(locked, read);
-                    }
+                    case 5 -> deletePassword(locked, read);
                     case 6 -> {
                         locked = true;
                         passwordCheck = false;
@@ -82,15 +74,13 @@ public class Main {
                     default -> System.out.println("Invalid input");
                 }
             }
+        }
 
         System.out.println("Good bye!");
     }
 
-   //US_3_S2
     private static void selection(int menu,boolean passwordCheck){
-        for(ISubscriber i: menuSubscriber){
-            i.selection(menu,passwordCheck);
-        }
+        menuSubscriber.forEach(i -> i.selection(menu, passwordCheck));
     }
 
     private static void setNewMasterPassword(Scanner read) throws Exception {
@@ -111,7 +101,6 @@ public class Main {
                     System.out.println("Strength of Password: " + passwordStrength);
                     masterPw = read.next();
                     passwordStrength = PasswordPolicyFactory.createPasswordPolicy(passwordStrengthMode).getStrength(masterPw);
-
                 }
 
         System.out.println("Enter your new password again");
@@ -137,7 +126,7 @@ public class Main {
         oldPasswords.delete();
     }
 
-    private static void deletePassword(boolean locked, Scanner read) throws Exception {
+    private static void deletePassword(boolean locked, Scanner read) {
         if (locked) {
             System.out.println("Please unlock first by entering the master password.");
         } else {
@@ -171,16 +160,14 @@ public class Main {
             String passwordName = read.next();
             System.out.println(passwordSafeEngine.getPassword(passwordName));
         }
-        return;
     }
 
     private static void showAll(boolean locked) throws Exception {
         if (locked) {
             System.out.println("Please unlock first by entering the master password.");
         } else {
-            Arrays.stream(passwordSafeEngine.getStoredPasswords()).forEach(pw -> System.out.println(pw));
+            Arrays.stream(passwordSafeEngine.getStoredPasswords()).forEach(System.out::println);
         }
-        return;
     }
 
     private static boolean isLocked(Scanner read) throws Exception {
