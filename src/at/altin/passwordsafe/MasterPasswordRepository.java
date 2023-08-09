@@ -18,20 +18,20 @@ public class MasterPasswordRepository {
         this.masterPasswordPath = masterPasswordPath;
     }
     public void setMasterPasswordPlain(String masterPassword) throws Exception {
-        this.StoreMasterPasswordToFile(masterPassword);
+        this.storeMasterPasswordToFile(masterPassword);
     }
     public String getMasterPasswordPlain() throws Exception {
-        return this.GetMasterPasswordFromFile();
+        return this.getMasterPasswordFromFile();
     }
     public boolean MasterPasswordIsEqualTo(String masterPassword) throws Exception {
-        return masterPassword.equals(this.GetMasterPasswordFromFile());
+        return masterPassword.equals(this.getMasterPasswordFromFile());
     }
-    private String GetMasterPasswordFromFile() throws Exception {
+    private String getMasterPasswordFromFile() throws Exception {
         File passwordFile = new File(this.masterPasswordPath);
         char[] buffer = MultipleFilesDataLayer.getCipherPassword(passwordFile);
         return buffer == null ? null : new String(buffer);
     }
-    private void StoreMasterPasswordToFile(String masterPassword) throws Exception {
+    private void storeMasterPasswordToFile(String masterPassword) throws Exception {
         FileWriter writer = null;
         try {
             writer = new FileWriter(this.masterPasswordPath);

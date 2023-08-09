@@ -11,19 +11,14 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /***
  * Class for encryption and decryption
  * contains methods for encryption and decryption
  */
 
-public class CipherFacility {
-    private final String key;
-    CipherFacility(String key) {
-        this.key = key;
-    }
+public record CipherFacility(String key) {
+
     public String Decrypt(String crypted) throws NoSuchPaddingException, NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(
@@ -33,6 +28,7 @@ public class CipherFacility {
         byte[] plain = cipher.doFinal(this.GetByteArrayFromString(crypted));
         return new String(plain);
     }
+
     public String Encrypt(String plain) throws UnsupportedEncodingException, InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
         Cipher cipher = Cipher.getInstance("AES");
         cipher.init(
@@ -41,27 +37,9 @@ public class CipherFacility {
         byte[] encrypted = cipher.doFinal(plain.getBytes());
         return this.GetStringFromByteArray(encrypted);
     }
-    /*
-    public byte[] EncryptToBytes(String plain) throws UnsupportedEncodingException, InvalidKeyException, NoSuchPaddingException, NoSuchAlgorithmException, IllegalBlockSizeException, BadPaddingException {
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(
-                Cipher.ENCRYPT_MODE,
-                this.GetAESFormattedKeyFrom(this.key));
-       return cipher.doFinal(plain.getBytes());
-    }
-    */
-    /*
-    public String DecryptBytes(byte[] crypted) throws NoSuchPaddingException, NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        Cipher cipher = Cipher.getInstance("AES");
-        cipher.init(
-                Cipher.DECRYPT_MODE,
-                this.GetAESFormattedKeyFrom(this.key));
-        byte[] tmp = crypted;
-        byte[] plain = cipher.doFinal(crypted);
-        return new String(plain);
-    }*/
+
     private SecretKeySpec GetAESFormattedKeyFrom(String key) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        byte[] keyBytes = (key).getBytes("UTF-8");
+        byte[] keyBytes = (key).getBytes(StandardCharsets.UTF_8);
         MessageDigest sha = MessageDigest.getInstance("SHA-256");
         keyBytes = sha.digest(keyBytes);
         keyBytes = Arrays.copyOf(keyBytes, 16);
@@ -69,17 +47,20 @@ public class CipherFacility {
     }
 
     private String GetStringFromByteArray(byte[] source) {
-        String tmp = "";
-        for (int i = 0; i < source.length; i++) {
-            tmp += source[i] + ",";
+        StringBuilder tmp = new StringBuilder();
+        for (byte b : source) {
+            tmp.append(b).append(",");
         }
-        return tmp;
+        return tmp.toString();
     }
+
     private byte[] GetByteArrayFromString(String source) {
         String[] bytesAsString = source.split(",");
         byte[] bytes = new byte[bytesAsString.length];
-        for(int i = 0; i < bytes.length; i++) {
+        int i = 0;
+        while (i < bytes.length) {
             bytes[i] = Byte.parseByte(bytesAsString[i]);
+            i++;
         }
         return bytes;
     }

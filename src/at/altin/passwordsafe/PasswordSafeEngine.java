@@ -23,19 +23,19 @@ public class PasswordSafeEngine {
         this.dataLayer = dataLayer;
     }
 
-    public String[] GetStoredPasswords() throws Exception {
+    public String[] getStoredPasswords() throws Exception {
         return dataLayer.getAllNamesOfPasswords();
     }
 
-    public void AddNewPassword(PasswordInfo info) throws IOException, Exception {
+    public void addNewPassword(PasswordInfo info) throws IOException, Exception {
         this.dataLayer.storeNewPassword(
                 info.getName(),
                 this.cipherFaciility.Encrypt(info.getPlain()));
     }
-    public void DeletePassword(String passwordName) throws Exception, IOException {
+    public void deletePassword(String passwordName) throws Exception, IOException {
       this.dataLayer.deletePassword(passwordName,this);
     }
-    public String GetPassword(String passwordName) throws IOException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
+    public String getPassword(String passwordName) throws IOException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         char[] buffer = this.dataLayer.getPasswordCipher(passwordName, this);
         return this.cipherFaciility.Decrypt(new String(buffer));
     }

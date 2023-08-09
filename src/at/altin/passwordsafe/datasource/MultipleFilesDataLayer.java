@@ -80,8 +80,7 @@ public record MultipleFilesDataLayer(String path) implements IDataSourceLayer {
         List<File> files = Arrays.asList(directory.listFiles());
         return files.stream()
                 .filter(s -> s.getName().endsWith(".pw"))
-                .map(f -> f.getName().split("\\.")[0])
-                .collect(Collectors.toList()).toArray(new String[0]);
+                .map(f -> f.getName().split("\\.")[0]).toArray(String[]::new);
     }
 
     private void WriteToFile(String filename, String crypted) throws IOException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {

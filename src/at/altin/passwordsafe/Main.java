@@ -18,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 /***
  * Main Class
@@ -54,42 +55,31 @@ public class Main {
                 selection(input,passwordCheck);
 
                 switch (input) {
-                    case 0: {
+                    case 0 -> {
                         abort = true;
-                        break;
                     }
-                    case 1: {
-                        passwordCheck =false;
+                    case 1 -> {
+                        passwordCheck = false;
                         locked = isLocked(read);
-                        break;
                     }
-                    case 2: {
+                    case 2 -> {
                         showAll(locked);
-                        break;
                     }
-                    case 3: {
+                    case 3 -> {
                         showSingle(locked, read);
-                        break;
                     }
-                    case 4: {
-                        addNew(locked, read);
-                        break;
-                    }
-                    case 5: {
+                    case 4 -> addNew(locked, read);
+                    case 5 -> {
                         deletePassword(locked, read);
-                        break;
                     }
-
-                    case 6: {
+                    case 6 -> {
                         locked = true;
                         passwordCheck = false;
                         passwordSafeEngine = null;
 
                         setNewMasterPassword(read);
-                        break;
                     }
-                    default:
-                        System.out.println("Invalid input");
+                    default -> System.out.println("Invalid input");
                 }
             }
 
@@ -141,9 +131,7 @@ public class Main {
         File oldPasswords = new File("./passwords.pw");
         if (oldPasswords.isDirectory()) {
             String[] children = oldPasswords.list();
-            for (int i = 0; i < children.length; i++) {
-                (new File(oldPasswords, children[i])).delete();
-            }
+            IntStream.range(0, children.length).forEachOrdered(i -> (new File(oldPasswords, children[i])).delete());
         }
 
         oldPasswords.delete();
@@ -156,7 +144,7 @@ public class Main {
             System.out.println("Enter password name");
             String passwordName = read.next();
             try {
-                passwordSafeEngine.DeletePassword(passwordName);
+                passwordSafeEngine.deletePassword(passwordName);
             }catch (Exception e){
                 System.out.println("Deletion not possible, Password may not exist!");
             }
@@ -171,7 +159,7 @@ public class Main {
             String passwordName = read.next();
             System.out.println("Enter password");
             String password = read.next();
-            passwordSafeEngine.AddNewPassword(new PasswordInfo(password, passwordName));
+            passwordSafeEngine.addNewPassword(new PasswordInfo(password, passwordName));
         }
     }
 
@@ -181,7 +169,7 @@ public class Main {
         } else {
             System.out.println("Enter password name");
             String passwordName = read.next();
-            System.out.println(passwordSafeEngine.GetPassword(passwordName));
+            System.out.println(passwordSafeEngine.getPassword(passwordName));
         }
         return;
     }
@@ -190,7 +178,7 @@ public class Main {
         if (locked) {
             System.out.println("Please unlock first by entering the master password.");
         } else {
-            Arrays.stream(passwordSafeEngine.GetStoredPasswords()).forEach(pw -> System.out.println(pw));
+            Arrays.stream(passwordSafeEngine.getStoredPasswords()).forEach(pw -> System.out.println(pw));
         }
         return;
     }
