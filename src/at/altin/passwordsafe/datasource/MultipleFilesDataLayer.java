@@ -13,7 +13,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /***
  * Class for multiple files data source
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
 public record MultipleFilesDataLayer(String path) implements IDataSourceLayer {
 
     @Override
-    public void deletePassword(String passwordName, PasswordSafeEngine passwordSafeEngine) throws Exception {
+    public void deletePassword(String passwordName) throws Exception {
         File storage = this.GetFileFromName(passwordName);
         if (!storage.delete()) {
             throw new Exception("Unable to delete password setting under " + storage.getName());

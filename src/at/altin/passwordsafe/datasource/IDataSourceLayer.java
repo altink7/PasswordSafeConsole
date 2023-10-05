@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 
 public interface IDataSourceLayer {
-    void deletePassword(String passwordName, PasswordSafeEngine passwordSafeEngine) throws Exception;
+    void deletePassword(String passwordName) throws Exception;
 
     char[] getPasswordCipher(String passwordName, PasswordSafeEngine passwordSafeEngine) throws IOException;
 

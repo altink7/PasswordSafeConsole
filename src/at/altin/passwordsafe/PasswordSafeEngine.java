@@ -1,5 +1,9 @@
 package at.altin.passwordsafe;;
 import at.altin.passwordsafe.datasource.IDataSourceLayer;
+import at.altin.passwordsafe.passwordcommand.command.DeletePasswordFileOperation;
+import at.altin.passwordsafe.passwordcommand.command.StoreNewPasswordFileOperation;
+import at.altin.passwordsafe.passwordcommand.invoker.PasswordFileOperationExecutor;
+import at.altin.passwordsafe.passwordcommand.receiver.PasswordFileOperationService;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -18,6 +22,8 @@ public class PasswordSafeEngine {
 
     private final CipherFacility cipherFaciility;
 
+    private final PasswordFileOperationExecutor executor = new PasswordFileOperationExecutor();
+
     public PasswordSafeEngine(CipherFacility cipherFacility,IDataSourceLayer dataLayer) {
         this.cipherFaciility = cipherFacility;
         this.dataLayer = dataLayer;
@@ -27,14 +33,14 @@ public class PasswordSafeEngine {
         return dataLayer.getAllNamesOfPasswords();
     }
 
-    public void addNewPassword(PasswordInfo info) throws IOException, Exception {
-        this.dataLayer.storeNewPassword(
-                info.getName(),
-                this.cipherFaciility.Encrypt(info.getPlain()));
+    public void addNewPassword(PasswordInfo info) throws Exception {
+        this.executor.addOperation(new StoreNewPasswordFileOperation(
+                new PasswordFileOperationService(info.getName(), this.cipherFaciility.Encrypt(info.getPlain()))));
     }
-    public void deletePassword(String passwordName) throws Exception, IOException {
-      this.dataLayer.deletePassword(passwordName,this);
+    public void deletePassword(String passwordName) throws Exception {
+      this.executor.addOperation(new DeletePasswordFileOperation(new PasswordFileOperationService(passwordName,null)));
     }
+
     public String getPassword(String passwordName) throws IOException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         char[] buffer = this.dataLayer.getPasswordCipher(passwordName, this);
         return this.cipherFaciility.Decrypt(new String(buffer));
