@@ -3,6 +3,8 @@ package at.altin.passwordsafe.passwordcommand.receiver;
 import at.altin.passwordsafe.datasource.IDataSourceLayer;
 import at.altin.passwordsafe.datasource.MultipleFilesDataLayer;
 
+import static at.altin.passwordsafe.Main.logger;
+
 /**
  * receiver for password file operation <br>
  * just a wrapper for data layer to be used by command pattern

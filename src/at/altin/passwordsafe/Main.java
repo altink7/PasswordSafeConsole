@@ -30,7 +30,7 @@ public class Main {
 
     private static final MasterPasswordRepository masterRepository = new MasterPasswordRepository("./master.pw");
     private static PasswordSafeEngine passwordSafeEngine = null;
-    private static LoggerRepo logger;
+    public static LoggerRepo logger = LoggerFactoryService.getInstance().loggerRepoInstance();
     static boolean passwordCheck =false;
 
 
@@ -44,7 +44,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
             System.out.println("Welcome to Passwordsafe");
 
-            logger = LoggerFactoryService.getInstance().loggerRepoInstance();
 
             boolean abort = false;
             boolean locked = true;
