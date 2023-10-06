@@ -16,7 +16,6 @@ import java.util.Arrays;
  * Class for encryption and decryption
  * contains methods for encryption and decryption
  */
-
 public record CipherFacility(String key) {
 
     public String Decrypt(String crypted) throws NoSuchPaddingException, NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {

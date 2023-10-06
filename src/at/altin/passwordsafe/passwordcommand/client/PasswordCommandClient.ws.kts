@@ -1,7 +1,9 @@
 @file:Suppress("unused")
 
 package at.altin.passwordsafe.passwordcommand.client
-
+//ACHTUNG, DIENT NUR ALS DOKUMENTATION
+//ALTIN IT SOLUTIONS CLIENTS SIND GEWÖHNLICH
+//IN KOTLIN IMPLEMENTIERT DAHER ws.kts file
 /**
  * Command Pattern in PasswordSafeEngine
  * =====================================

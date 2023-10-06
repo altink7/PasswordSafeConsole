@@ -5,9 +5,7 @@ package at.altin.passwordsafe.logger;
  * + hier wird Singleton Pattern angewendet
  *
  */
-
 public class LoggerFactoryService implements LoggerRepoFactory{
-    private static final Object object = new Object();
     private static volatile LoggerFactoryService instance;
 
     private final LoggerRepo logger;
@@ -21,7 +19,7 @@ public class LoggerFactoryService implements LoggerRepoFactory{
             return instance;
         }
 
-        synchronized (object) {
+        synchronized (LoggerFactoryService.class) {
             if (instance == null) {
                 instance = new LoggerFactoryService();
             }

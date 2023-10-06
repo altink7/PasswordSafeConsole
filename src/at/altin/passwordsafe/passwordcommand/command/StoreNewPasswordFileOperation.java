@@ -1,7 +1,5 @@
 package at.altin.passwordsafe.passwordcommand.command;
 
-import at.altin.passwordsafe.logger.LoggerFactoryService;
-import at.altin.passwordsafe.logger.LoggerRepo;
 import at.altin.passwordsafe.passwordcommand.receiver.PasswordFileOperationService;
 
 import static at.altin.passwordsafe.Main.logger;

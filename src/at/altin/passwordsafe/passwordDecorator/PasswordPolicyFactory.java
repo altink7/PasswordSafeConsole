@@ -9,6 +9,14 @@ package at.altin.passwordsafe.passwordDecorator;
 public class PasswordPolicyFactory{
 
 
+    /**
+     * hier wird das PasswordPolicy Objekt erstellt
+     * Die PasswordPolicy werden erstellt und sich selbst als Parameter übergeben <br>
+     * damit wird das Decorator Pattern verwendet
+     * @param strongPolicyMode soll true sein, wenn das Passwort eine starke Policy haben soll (von 4 Regeln),
+     *                        ansonsten false (von 2 Regeln)
+     * @return PasswordPolicy Objekt bestehend aus 2 oder 4 Regeln
+     */
     public static IPasswordPolicy createPasswordPolicy(boolean strongPolicyMode ) {
         IPasswordPolicy passwordPolicy = new PasswordContainsUpperChar(); //R1
         passwordPolicy = new PasswordLength(passwordPolicy); //R3

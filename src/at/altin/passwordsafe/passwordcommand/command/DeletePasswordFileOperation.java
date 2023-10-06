@@ -1,7 +1,5 @@
 package at.altin.passwordsafe.passwordcommand.command;
 
-import at.altin.passwordsafe.logger.LoggerFactoryService;
-import at.altin.passwordsafe.logger.LoggerRepo;
 import at.altin.passwordsafe.passwordcommand.receiver.PasswordFileOperationService;
 
 import static at.altin.passwordsafe.Main.logger;
@@ -18,6 +16,7 @@ public class DeletePasswordFileOperation implements PasswordFileOperation{
     public DeletePasswordFileOperation(PasswordFileOperationService receiver) {
         this.receiver = receiver;
     }
+
     @Override
     public void execute() throws Exception {
         logger.infoMessage("deleting password file");

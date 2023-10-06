@@ -5,7 +5,6 @@ package at.altin.passwordsafe.passwordDecorator;
  * implements IPasswordPolicy
  * R3
  */
-
 public class PasswordLength extends PasswordStrengthDecorator {
 
     public PasswordLength(IPasswordPolicy passwordPolicy) {

@@ -4,7 +4,6 @@ package at.altin.passwordsafe;
  * PasswordInfo
  * contains password and strength
  */
-
 public class PasswordInfo {
     private String plain;
     private String name;

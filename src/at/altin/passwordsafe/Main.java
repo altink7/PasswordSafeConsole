@@ -25,7 +25,6 @@ import java.util.stream.IntStream;
  * contains main method
  * contains methods for user interaction
  */
-
 public class Main {
 
     private static final MasterPasswordRepository masterRepository = new MasterPasswordRepository("./master.pw");
@@ -34,14 +33,14 @@ public class Main {
     static boolean passwordCheck =false;
 
 
-    private static final LinkedList<ISubscriber> menuSubscriber = new LinkedList<ISubscriber>(){
+    private static final LinkedList<ISubscriber> menuSubscriber = new LinkedList<>() {
         {
             add(new PasswordResetSubscriber());
             add(new WrongPasswordSubscriber());
         }
     };
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
             System.out.println("Welcome to Passwordsafe");
 
 
@@ -73,6 +72,20 @@ public class Main {
                     default -> System.out.println("Invalid input");
                 }
             }
+        } catch (NoSuchPaddingException e) {
+            System.out.println("NoSuchPaddingException"+ e.getMessage());
+        } catch (IllegalBlockSizeException e) {
+            System.out.println("IllegalBlockSizeException" + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("IOException" + e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("NoSuchAlgorithmException" + e.getMessage());
+        } catch (BadPaddingException e) {
+            System.out.println("BadPaddingException" + e.getMessage());
+        } catch (InvalidKeyException e) {
+            System.out.println("InvalidKeyException" + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Exception" + e.getMessage());
         }
 
         System.out.println("Good bye!");
@@ -119,7 +132,9 @@ public class Main {
         File oldPasswords = new File("./passwords.pw");
         if (oldPasswords.isDirectory()) {
             String[] children = oldPasswords.list();
-            IntStream.range(0, children.length).forEachOrdered(i -> (new File(oldPasswords, children[i])).delete());
+            if (children != null) {
+                IntStream.range(0, children.length).forEachOrdered(i -> (new File(oldPasswords, children[i])).delete());
+            }
         }
 
         oldPasswords.delete();

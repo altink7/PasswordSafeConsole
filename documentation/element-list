@@ -1,0 +1,11 @@
+at.altin.passwordsafe
+at.altin.passwordsafe.beta.annotation.validator
+at.altin.passwordsafe.beta.annotation.validator.annotation
+at.altin.passwordsafe.beta.annotation.validator.modelvalidator
+at.altin.passwordsafe.datasource
+at.altin.passwordsafe.logger
+at.altin.passwordsafe.passwordcommand.command
+at.altin.passwordsafe.passwordcommand.invoker
+at.altin.passwordsafe.passwordcommand.receiver
+at.altin.passwordsafe.passwordDecorator
+at.altin.passwordsafe.passwordsubscriber

@@ -14,6 +14,10 @@ import static java.lang.System.out;
 
 public class PasswordResetSubscriber implements ISubscriber {
     record SelectionState(Integer menu, Date timeStamp) {}
+
+    /** jedes Child hat eine eigene Liste <br>
+     * damit wir die Zeitpunkte speichern können und getrennt von anderen Subscribern Statistiken ausgeben können <br>
+     */
     private final LinkedList<SelectionState> selectionState = new LinkedList<>();
 
     @Override

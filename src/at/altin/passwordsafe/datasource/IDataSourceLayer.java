@@ -8,7 +8,6 @@ import java.io.IOException;
  * can be used to add new data source
  * contains method to save and load data
  */
-
 public interface IDataSourceLayer {
     void deletePassword(String passwordName) throws Exception;
 

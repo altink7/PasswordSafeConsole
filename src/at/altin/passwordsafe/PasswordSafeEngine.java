@@ -3,7 +3,7 @@ import at.altin.passwordsafe.datasource.IDataSourceLayer;
 import at.altin.passwordsafe.passwordcommand.command.DeletePasswordFileOperation;
 import at.altin.passwordsafe.passwordcommand.command.StoreNewPasswordFileOperation;
 import at.altin.passwordsafe.passwordcommand.invoker.PasswordFileOperationExecutor;
-import at.altin.passwordsafe.passwordcommand.receiver.PasswordFileOperationService;
+import at.altin.passwordsafe.passwordcommand.receiver.PasswordFileOperationServiceBuilder;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
@@ -16,16 +16,15 @@ import java.security.NoSuchAlgorithmException;
  * Class for encryption and decryption
  * contains methods to delete, read and write passwords
  */
-
 public class PasswordSafeEngine {
     private IDataSourceLayer dataLayer;
 
-    private final CipherFacility cipherFaciility;
+    private final CipherFacility cipherFacility;
 
     private final PasswordFileOperationExecutor executor = new PasswordFileOperationExecutor();
 
     public PasswordSafeEngine(CipherFacility cipherFacility,IDataSourceLayer dataLayer) {
-        this.cipherFaciility = cipherFacility;
+        this.cipherFacility = cipherFacility;
         this.dataLayer = dataLayer;
     }
 
@@ -35,14 +34,17 @@ public class PasswordSafeEngine {
 
     public void addNewPassword(PasswordInfo info) throws Exception {
         this.executor.addOperation(new StoreNewPasswordFileOperation(
-                new PasswordFileOperationService(info.getName(), this.cipherFaciility.Encrypt(info.getPlain()))));
+                new PasswordFileOperationServiceBuilder()
+                        .setPassword(info.getName())
+                        .setCypher(this.cipherFacility.Encrypt(info.getPlain()))
+                        .create()));
     }
     public void deletePassword(String passwordName) throws Exception {
-      this.executor.addOperation(new DeletePasswordFileOperation(new PasswordFileOperationService(passwordName,null)));
+      this.executor.addOperation(new DeletePasswordFileOperation(new PasswordFileOperationServiceBuilder().setPassword(passwordName).create()));
     }
 
     public String getPassword(String passwordName) throws IOException, NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         char[] buffer = this.dataLayer.getPasswordCipher(passwordName, this);
-        return this.cipherFaciility.Decrypt(new String(buffer));
+        return this.cipherFacility.Decrypt(new String(buffer));
     }
 }
